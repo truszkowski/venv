@@ -1,41 +1,49 @@
-To use, place <code>venv.bash</code> somewhere and source it, a la:
+# Installation
 
-    . venv.bash
-    
-You can do this by hand or put it in your <code>~/.bashrc</code>,
-which I suggest for ongoing use.
+Install:
 
-Once it is "installed" via that eval, it defines a <code>venv</code>
-function which supports:
+	$ ./install.sh
+	$ source ~/.venv/bash/venv.sh
 
-    venv [create <name>]
-         [destroy <name>]
-         [use <name>]
-         [ls]
-         
-to create, destroy, use, and list virtual environments respectively.
+Use:
 
-Demo:
+	$ venv
+	venv [create <name>]   - to create new virtualenv
+	     [destroy <name>]  - to destroy chosen virtualenv
+	     [use <name>]      - to activate chosen virtualenv
+	     [exit]            - to deactivate current virtualenv
+	     [ls]              - to list available virtualenvs
 
-    brianm@binky:~$
-    brianm@binky:~$ venv create spiffy
-    New python executable in /Users/brianm/.venv/spiffy/bin/python
-    Installing setuptools............done.
-    Installing pip...............done.
-    brianm@binky:~$ venv use spiffy
-    (spiffy)brianm@binky:~$ which python
-    /Users/brianm/.venv/spiffy/bin/python
-    (spiffy)brianm@binky:~$ venv ls
-    spiffy
-    (spiffy)brianm@binky:~$ deactivate 
-    brianm@binky:~$ 
+# Python
 
-Use <code>$VENV_PROMPT_COLOR</code> to set an ansi color code for the
-color of the virtual env name in the prompt. I like
-<code>VENV_PROMPT_COLOR='38;5;53'</code> in <code>xterm-256color</code>. In
-traditional 16 color <code>xterm-color</code> I would tend towards
-<code>VENV_PROMPT_COLOR='0;35'</code>.
+Similar usage to [/brianm/venv/](https://github.com/brianm/venv/).
 
-Use <code>$VENV_DIR</code> if you don't want virtual environments
-stored in <code>~/.venv</code>.
+# C/C++ and CMake
+
+On activate venv creates alias:
+
+```bash
+	alias cmake="cmake -DCMAKE_INSTALL_PREFIX=${VIRTUAL_ENV} -DCMAKE_MODULE_PATH=${HOME}/.venv/cmake/"
+```
+
+Which tell cmake to install files and targets into virtualenv directory.
+
+Also creates aliases:
+
+```bash
+	alias rpm_install="rpm --prefix=${VIRTUAL_ENV} --dbpath ${VIRTUAL_ENV}/db --nodeps -ivh"
+	alias rpm_upgrade="rpm --prefix=${VIRTUAL_ENV} --dbpath ${VIRTUAL_ENV}/db --nodeps -Uvh"
+	alias rpm_remove="rpm --dbpath ${VIRTUAL_ENV}/db -e"
+```
+
+# Files in ~/.venv/
+
+Structure:
+
+```
+	~/.venv/
+		venv/ <your-virtualenvs>
+		bash/ <your-bash-scripts>
+		cmake/ <yout-cmake-modules>
+```
 
