@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # directory for virtualenvs
-VENV_DIR="${HOME}/.venv/venv/"
+VENV_DIR="${HOME}/.venv/venv"
 
 ## Set variables and aliases for c/c++
 function activate_cpp()
