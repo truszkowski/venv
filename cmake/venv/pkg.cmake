@@ -58,7 +58,7 @@ elseif (NOT "${CMAKE_BUILD_TYPE}" STREQUAL "Release")
 	set (PKG_NAME "${PKG_NAME}${PKG_NAME_SUFFIX}")
 endif ()
 
-set (CPACK_GENERATOR                 "RPM")
+set (CPACK_GENERATOR                 "RPM;TGZ")
 set (CPACK_RPM_PACKAGE_RELOCATABLE   on)
 set (CPACK_PACKAGE_VERSION           "${PKG_VERSION}")
 set (CPACK_SYSTEM_NAME               "${PKG_ARCH}")
